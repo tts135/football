@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比赛预测 - 足球数据分析</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/predict.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="predict-container">
+        <!-- 页面头部 -->
+        <header class="predict-header">
+            <div class="nav-back">
+                <a href="/" class="back-button">← 返回大屏</a>
+            </div>
+            <h1>智能比赛预测</h1>
+            <div class="header-actions">
+                <button class="refresh-btn" onclick="loadTeams()">🔄 刷新球队</button>
+            </div>
+        </header>
+
+        <!-- 预测表单区域 -->
+        <section class="predict-form-section">
+            <div class="form-container">
+                <h2>比赛信息输入</h2>
+                <form id="predictionForm" class="prediction-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="league">联赛选择:</label>
+                            <select id="league" name="league" required>
+                                <option value="中超">中超</option>
+                                <option value="意甲">意甲</option>
+                                <option value="英超">英超</option>
+                                <option value="西甲">西甲</option>
+                                <option value="德甲">德甲</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="homeTeam">主队:</label>
+                            <input type="text" id="homeTeam" name="home_team" list="teamsList" placeholder="请输入主队名称" required>
+                        </div>
+                        <div class="vs-indicator">VS</div>
+                        <div class="form-group">
+                            <label for="awayTeam">客队:</label>
+                            <input type="text" id="awayTeam" name="away_team" list="teamsList" placeholder="请输入客队名称" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="predict-btn">
+                            <span class="btn-text">开始预测</span>
+                            <span class="btn-loading" style="display: none;">预测中...</span>
+                        </button>
+                        <button type="button" class="clear-btn" onclick="clearForm()">清空</button>
+                    </div>
+                </form>
+                
+                <!-- 球队列表数据 -->
+                <datalist id="teamsList">
+                    <!-- 动态加载球队列表 -->
+                </datalist>
+            </div>
+        </section>
+
+        <!-- 球队历史数据展示区域 -->
+        <section class="team-history-section" id="teamHistorySection" style="display: none;">
+            <div class="history-container">
+                <h2>📋 球队近期表现</h2>
+                <div class="history-comparison">
+                    <div class="team-column" id="homeTeamColumn">
+                        <h3 id="homeTeamTitle">主队近期战绩</h3>
+                        <div class="history-matches" id="homeTeamMatches">
+                            <!-- 主队历史比赛数据 -->
+                        </div>
+                    </div>
+                    <div class="team-column" id="awayTeamColumn">
+                        <h3 id="awayTeamTitle">客队近期战绩</h3>
+                        <div class="history-matches" id="awayTeamMatches">
+                            <!-- 客队历史比赛数据 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 预测结果展示区域 -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <div class="results-container">
+                <h2>预测结果</h2>
+                
+                <!-- 比赛基本信息 -->
+                <div class="match-info">
+                    <div class="team-badge home-team">
+                        <span id="resultHomeTeam">主队</span>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team-badge away-team">
+                        <span id="resultAwayTeam">客队</span>
+                    </div>
+                    <div class="league-tag" id="resultLeague">中超</div>
+                </div>
+
+                <!-- 核心预测数据 -->
+                <div class="prediction-grid">
+                    <div class="prediction-card goals-card">
+                        <div class="card-icon">⚽</div>
+                        <h3>进球预测</h3>
+                        <div class="score-display">
+                            <span class="home-score" id="homeGoals">0.0</span>
+                            <span class="separator">-</span>
+                            <span class="away-score" id="awayGoals">0.0</span>
+                        </div>
+                        <div class="total-goals">
+                            总进球: <span id="totalGoals">0.0</span>
+                        </div>
+                    </div>
+
+                    <div class="prediction-card corners-card">
+                        <div class="card-icon">📐</div>
+                        <h3>角球预测</h3>
+                        <div class="corners-display">
+                            <div class="corner-item">
+                                <span class="team-label">主队</span>
+                                <span class="corner-value" id="homeCorners">0.0</span>
+                            </div>
+                            <div class="corner-item">
+                                <span class="team-label">客队</span>
+                                <span class="corner-value" id="awayCorners">0.0</span>
+                            </div>
+                        </div>
+                        <div class="total-corners">
+                            总角球: <span id="totalCorners">0.0</span>
+                        </div>
+                    </div>
+
+                    <div class="prediction-card cards-card">
+                        <div class="card-icon">🟨</div>
+                        <h3>黄牌预测</h3>
+                        <div class="cards-display">
+                            <div class="card-item">
+                                <span class="team-label">主队</span>
+                                <span class="card-value" id="homeYellow">0.0</span>
+                            </div>
+                            <div class="card-item">
+                                <span class="team-label">客队</span>
+                                <span class="card-value" id="awayYellow">0.0</span>
+                            </div>
+                        </div>
+                        <div class="total-cards">
+                            总黄牌: <span id="totalYellow">0.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 预测分析 -->
+                <div class="analysis-section">
+                    <h3>预测分析</h3>
+                    <div class="analysis-content" id="analysisContent">
+                        <!-- 动态生成分析内容 -->
+                    </div>
+                </div>
+
+                <!-- 操作按钮 -->
+                <div class="result-actions">
+                    <button class="new-predict-btn" onclick="showNewPrediction()">
+                        🔁 新的预测
+                    </button>
+                    <button class="share-btn" onclick="sharePrediction()">
+                        📤 分享结果
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 历史预测记录 -->
+        <section class="history-section">
+            <div class="history-container">
+                <h2>预测历史</h2>
+                <div class="history-list" id="historyList">
+                    <!-- 动态加载历史记录 -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 加载遮罩 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>AI正在分析比赛数据...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/predict.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>足球数据分析大屏</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- 顶部标题栏 -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">⚽</span>
+                <h1>足球数据分析大屏</h1>
+            </div>
+            <div class="system-info">
+                <div class="info-item">
+                    <span class="label">状态:</span>
+                    <span class="value status-running" id="systemStatus">运行中</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">时间:</span>
+                    <span class="value" id="currentTime"></span>
+                </div>
+                <!-- 预测功能入口 -->
+                <div class="info-item">
+                    <a href="/predict" class="predict-button">
+                        <span class="button-icon">🔮</span>
+                        <span class="button-text">智能预测</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主要数据概览 -->
+        <section class="overview-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="card-header">
+                        <h3>总比赛数</h3>
+                        <div class="icon">🏟️</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="number" id="totalMatches">0</div>
+                        <div class="trend positive">↑ 12%</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="card-header">
+                        <h3>场均进球</h3>
+                        <div class="icon">⚽</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="number" id="avgGoals">0.0</div>
+                        <div class="trend negative">↓ 2%</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="card-header">
+                        <h3>场均角球</h3>
+                        <div class="icon">📐</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="number" id="avgCorners">0.0</div>
+                        <div class="trend positive">↑ 5%</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="card-header">
+                        <h3>黄牌数</h3>
+                        <div class="icon">🟨</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="number" id="avgYellowCards">0.0</div>
+                        <div class="trend neutral">→ 0%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联赛分布图表 -->
+        <section class="charts-section">
+            <div class="chart-container">
+                <h2 class="section-title">联赛数据分布</h2>
+                <div class="chart-wrapper">
+                    <canvas id="leagueChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h2 class="section-title">近期比赛趋势</h2>
+                <div class="chart-wrapper">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 实时比赛数据 -->
+        <section class="matches-section">
+            <h2 class="section-title">最新比赛数据</h2>
+            <div class="matches-table-container">
+                <table class="matches-table" id="matchesTable">
+                    <thead>
+                        <tr>
+                            <th>联赛</th>
+                            <th>日期</th>
+                            <th>主队</th>
+                            <th>比分</th>
+                            <th>客队</th>
+                            <th>角球</th>
+                            <th>黄牌</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 动态加载数据 -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 底部信息栏 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-item">
+                    <span>数据更新时间:</span>
+                    <span id="lastUpdate"></span>
+                </div>
+                <div class="footer-item">
+                    <span>技术支持:</span>
+                    <span>足球数据分析团队</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 加载动画 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>正在加载数据...</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
