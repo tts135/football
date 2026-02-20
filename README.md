@@ -1,64 +1,101 @@
-# 足球数据分析预测系统
+# 🏆 足球数据分析预测系统
+
+一个完整的足球比赛数据分析和预测系统，支持数据处理、模型训练、命令行预测和Web可视化大屏展示。
 
 ## 项目概述
 
 这是一个基于统计基线法和联赛特征修正的足球数据分析预测系统，能够预测比赛的进球数、角球数和黄牌数等关键指标。
 
-## 项目结构
+## 📁 项目结构
+
+经过优化后的项目结构：
 
 ```
 football/
-├── src/                    # 源代码目录
-│   ├── config/            # 配置文件
-│   │   └── league_coefficients.py  # 联赛系数配置
-│   ├── data/              # 数据处理模块
-│   │   └── data_processor.py       # 数据解析和处理
-│   ├── models/            # 数据模型
-│   │   └── data_models.py          # 数据结构定义
-│   ├── predictors/        # 预测模块
-│   │   └── football_predictor.py   # 核心预测算法
-│   ├── trainers/          # 训练模块
-│   │   └── baseline_trainer.py     # 基线参数训练
-│   └── main.py            # 主程序入口
-├── 2021/                  # 2021年原始数据
-├── 2023/                  # 2023年原始数据
-├── simple_test.py         # 简单测试脚本
-├── test_system.py         # 完整测试脚本
-└── README.md              # 本文件
+├── data/                    # 数据目录
+│   ├── raw/                 # 原始数据
+│   │   ├── 2021/            # 2021年原始JSON数据
+│   │   └── 2023/            # 2023年原始JSON数据
+│   └── processed/           # 处理后的数据
+│       ├── matches.csv      # 标准化比赛数据
+│       └── league_stats.json # 联赛统计信息
+├── src/                     # 核心源代码
+│   ├── config/              # 配置文件
+│   ├── data/                # 数据处理模块
+│   ├── models/              # 数据模型
+│   ├── predictors/          # 预测模块
+│   ├── trainers/            # 训练模块
+│   └── utils/               # 工具函数
+├── webapp/                  # Web应用
+│   ├── templates/           # HTML模板
+│   ├── static/              # 静态资源
+│   └── app.py               # Flask应用
+├── scripts/                 # 统一脚本目录
+│   ├── setup_data.py        # 数据处理入口
+│   ├── train_model.py       # 模型训练入口
+│   ├── predict_cli.py       # 命令行预测入口
+│   └── start_app.py         # Web应用启动入口
+├── models/                  # 模型输出目录
+├── run.bat                  # 统一启动批处理文件
+└── requirements.txt         # 依赖文件
 ```
 
 ## 功能特性
 
 ### 核心预测功能
+
 - **进球数预测**: 基于球队攻防统计数据和主场优势
 - **角球数预测**: 结合控球率、射门数和历史角球数据
 - **黄牌数预测**: 考虑犯规数、历史黄牌记录和红牌折算
 - **多联赛支持**: 内置中超、意甲、英超、西甲、德甲系数
 
 ### 数据处理能力
+
 - **JSON数据解析**: 自动解析原始爬虫数据
 - **数据清洗**: 处理缺失值和异常数据
 - **统计计算**: 自动生成球队历史统计数据
 
 ### 模型训练
+
 - **基线参数训练**: 基于历史数据自动计算联赛特征
 - **交叉验证**: 评估模型预测准确性
 - **参数优化**: 自动调整预测系数
 
-## 安装和使用
+## 🚀 统一启动方式
 
-### 1. 环境准备
+项目提供统一的启动入口，简化操作流程：
+
+### 1. 统一启动脚本
+
+```bash
+# 运行统一启动菜单
+run.bat
+```
+
+```
+
+菜单选项：
+- 1: 数据处理 (setup_data.py)
+- 2: 模型训练 (train_model.py)
+- 3: 命令行预测 (predict_cli.py)
+- 4: Web应用 (start_app.py)
+- 5: 退出
+
+### 2. 环境准备
 
 ```bash
 # 安装必要依赖
-pip install pandas numpy
+pip install pandas numpy flask flask-cors
 
 # 或者如果使用conda
-conda install pandas numpy
+conda install pandas numpy flask flask-cors
+```
+
 ```
 
 ### 2. 快速开始
 
+#### 命令行模式
 ```bash
 # 运行简单测试（不需要外部依赖）
 python simple_test.py
@@ -74,6 +111,22 @@ python src/main.py --mode train
 
 # 预测特定比赛
 python src/main.py --mode predict --home-team "成都蓉城" --away-team "北京国安" --league "中超"
+```
+
+```
+
+#### Web大屏模式
+```bash
+# 方法1: 使用启动脚本（推荐）
+start_webapp.bat
+
+# 方法2: 手动启动
+# 激活虚拟环境后运行
+python webapp/app.py
+
+# 启动后访问: http://localhost:5000
+```
+
 ```
 
 ### 3. 使用示例
@@ -93,27 +146,34 @@ result = predictor.predict_single_match("成都蓉城", "北京国安")
 print(result)
 ```
 
+```
+
 ## 预测算法原理
 
 ### 进球数预测
 ```
+
 基础公式: (球队场均进球 + 对手场均失球) / 2
 主场修正: 基础值 × 主场优势系数
 联赛修正: 调整至联赛平均水平
-```
 
 ### 角球数预测
+
 ```
 核心逻辑: 控球率差异 + 射门数因子 + 球队角球基线
 主场优势: 主队控球率优势带来额外角球
 联赛修正: 按联赛平均角球数调整
 ```
 
+```
+
 ### 黄牌数预测
 ```
+
 基础构成: 球队历史黄牌 + 犯规转黄牌 + 红牌折算
 转换系数: 每5次犯规 ≈ 1张黄牌
 联赛修正: 考虑不同联赛的执法尺度
+
 ```
 
 ## 配置说明
@@ -135,6 +195,8 @@ LEAGUE_COEFFICIENTS = {
 }
 ```
 
+```
+
 ### 数据处理配置
 ```python
 DATA_CONFIG = {
@@ -143,6 +205,8 @@ DATA_CONFIG = {
     "goal_limits": (0.0, 5.0),     # 进球数合理范围
     # ... 其他配置
 }
+```
+
 ```
 
 ## 性能评估
@@ -154,24 +218,27 @@ DATA_CONFIG = {
 python src/main.py --mode evaluate --k-folds 5
 ```
 
-评估指标包括：
 - **MAE**: 平均绝对误差
-- **RMSE**: 均方根误差  
+- **RMSE**: 均方根误差
 - **准确率**: 胜平负方向判断准确率
 
 ## 扩展开发
 
 ### 添加新联赛
+
 1. 在 `league_coefficients.py` 中添加联赛配置
 2. 准备该联赛的历史数据
 3. 运行训练生成基线参数
 
 ### 自定义预测逻辑
+
 ```python
 class CustomPredictor(FootballPredictor):
     def predict_team_goals(self, team_stats, is_home=True):
         # 自定义进球预测逻辑
         pass
+```
+
 ```
 
 ### 集成机器学习
@@ -206,3 +273,4 @@ class CustomPredictor(FootballPredictor):
 ## 许可证
 
 本项目仅供学习和研究使用。
+```

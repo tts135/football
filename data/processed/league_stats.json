@@ -1,0 +1,268 @@
+{
+  "英超": {
+    "basic_info": {
+      "league_name": "英超",
+      "total_matches": 371,
+      "date_range": {
+        "earliest": "2021-1-13 2:00:00 AM",
+        "latest": "2021-9-28 3:00:00 AM"
+      }
+    },
+    "scoring_stats": {
+      "total_goals": 0,
+      "average_goals_per_match": 0.0,
+      "home_win_rate": 0.0,
+      "away_win_rate": 0.0,
+      "draw_rate": 100.0
+    },
+    "attacking_stats": {
+      "total_shots": 9367,
+      "total_shots_on_target": 3235,
+      "average_shots_per_match": 25.25,
+      "average_shots_on_target_per_match": 8.72,
+      "shot_accuracy_rate": 34.5
+    },
+    "disciplinary_stats": {
+      "total_yellow_cards": 1175,
+      "total_red_cards": 46,
+      "average_yellow_cards_per_match": 3.17,
+      "average_red_cards_per_match": 0.12
+    },
+    "set_piece_stats": {
+      "total_corners": 3725,
+      "average_corners_per_match": 10.04
+    },
+    "possession_stats": {
+      "average_home_possession": 0,
+      "average_away_possession": 0
+    }
+  },
+  "西甲": {
+    "basic_info": {
+      "league_name": "西甲",
+      "total_matches": 360,
+      "date_range": {
+        "earliest": "2021-1-10 11:15:00 PM",
+        "latest": "2021-9-28 3:00:00 AM"
+      }
+    },
+    "scoring_stats": {
+      "total_goals": 0,
+      "average_goals_per_match": 0.0,
+      "home_win_rate": 0.0,
+      "away_win_rate": 0.0,
+      "draw_rate": 100.0
+    },
+    "attacking_stats": {
+      "total_shots": 7976,
+      "total_shots_on_target": 2801,
+      "average_shots_per_match": 22.16,
+      "average_shots_on_target_per_match": 7.78,
+      "shot_accuracy_rate": 35.1
+    },
+    "disciplinary_stats": {
+      "total_yellow_cards": 1562,
+      "total_red_cards": 65,
+      "average_yellow_cards_per_match": 4.34,
+      "average_red_cards_per_match": 0.18
+    },
+    "set_piece_stats": {
+      "total_corners": 3108,
+      "average_corners_per_match": 8.63
+    },
+    "possession_stats": {
+      "average_home_possession": 0,
+      "average_away_possession": 0
+    }
+  },
+  "德甲": {
+    "basic_info": {
+      "league_name": "德甲",
+      "total_matches": 310,
+      "date_range": {
+        "earliest": "2021-1-10 10:30:00 PM",
+        "latest": "2021-9-26 9:30:00 PM"
+      }
+    },
+    "scoring_stats": {
+      "total_goals": 0,
+      "average_goals_per_match": 0.0,
+      "home_win_rate": 0.0,
+      "away_win_rate": 0.0,
+      "draw_rate": 100.0
+    },
+    "attacking_stats": {
+      "total_shots": 7882,
+      "total_shots_on_target": 2835,
+      "average_shots_per_match": 25.43,
+      "average_shots_on_target_per_match": 9.15,
+      "shot_accuracy_rate": 36.0
+    },
+    "disciplinary_stats": {
+      "total_yellow_cards": 1058,
+      "total_red_cards": 29,
+      "average_yellow_cards_per_match": 3.41,
+      "average_red_cards_per_match": 0.09
+    },
+    "set_piece_stats": {
+      "total_corners": 2795,
+      "average_corners_per_match": 9.02
+    },
+    "possession_stats": {
+      "average_home_possession": 0,
+      "average_away_possession": 0
+    }
+  },
+  "意甲": {
+    "basic_info": {
+      "league_name": "意甲",
+      "total_matches": 388,
+      "date_range": {
+        "earliest": "2021-1-10 10:00:00 PM",
+        "latest": "2021-9-28 2:45:00 AM"
+      }
+    },
+    "scoring_stats": {
+      "total_goals": 0,
+      "average_goals_per_match": 0.0,
+      "home_win_rate": 0.0,
+      "away_win_rate": 0.0,
+      "draw_rate": 100.0
+    },
+    "attacking_stats": {
+      "total_shots": 9925,
+      "total_shots_on_target": 3364,
+      "average_shots_per_match": 25.58,
+      "average_shots_on_target_per_match": 8.67,
+      "shot_accuracy_rate": 33.9
+    },
+    "disciplinary_stats": {
+      "total_yellow_cards": 1655,
+      "total_red_cards": 77,
+      "average_yellow_cards_per_match": 4.27,
+      "average_red_cards_per_match": 0.2
+    },
+    "set_piece_stats": {
+      "total_corners": 3581,
+      "average_corners_per_match": 9.23
+    },
+    "possession_stats": {
+      "average_home_possession": 0,
+      "average_away_possession": 0
+    }
+  },
+  "法甲": {
+    "basic_info": {
+      "league_name": "法甲",
+      "total_matches": 358,
+      "date_range": {
+        "earliest": "2021-1-10 4:00:00 AM",
+        "latest": "2021-9-27 2:45:00 AM"
+      }
+    },
+    "scoring_stats": {
+      "total_goals": 0,
+      "average_goals_per_match": 0.0,
+      "home_win_rate": 0.0,
+      "away_win_rate": 0.0,
+      "draw_rate": 100.0
+    },
+    "attacking_stats": {
+      "total_shots": 8214,
+      "total_shots_on_target": 2799,
+      "average_shots_per_match": 22.94,
+      "average_shots_on_target_per_match": 7.82,
+      "shot_accuracy_rate": 34.1
+    },
+    "disciplinary_stats": {
+      "total_yellow_cards": 1326,
+      "total_red_cards": 93,
+      "average_yellow_cards_per_match": 3.7,
+      "average_red_cards_per_match": 0.26
+    },
+    "set_piece_stats": {
+      "total_corners": 3334,
+      "average_corners_per_match": 9.31
+    },
+    "possession_stats": {
+      "average_home_possession": 0,
+      "average_away_possession": 0
+    }
+  },
+  "欧冠": {
+    "basic_info": {
+      "league_name": "欧冠",
+      "total_matches": 184,
+      "date_range": {
+        "earliest": "2021-10-20 12:45:00 AM",
+        "latest": "2021-9-16 3:00:00 AM"
+      }
+    },
+    "scoring_stats": {
+      "total_goals": 0,
+      "average_goals_per_match": 0.0,
+      "home_win_rate": 0.0,
+      "away_win_rate": 0.0,
+      "draw_rate": 100.0
+    },
+    "attacking_stats": {
+      "total_shots": 2822,
+      "total_shots_on_target": 1046,
+      "average_shots_per_match": 15.34,
+      "average_shots_on_target_per_match": 5.68,
+      "shot_accuracy_rate": 37.0
+    },
+    "disciplinary_stats": {
+      "total_yellow_cards": 469,
+      "total_red_cards": 23,
+      "average_yellow_cards_per_match": 2.55,
+      "average_red_cards_per_match": 0.12
+    },
+    "set_piece_stats": {
+      "total_corners": 1086,
+      "average_corners_per_match": 5.9
+    },
+    "possession_stats": {
+      "average_home_possession": 0,
+      "average_away_possession": 0
+    }
+  },
+  "中超": {
+    "basic_info": {
+      "league_name": "中超",
+      "total_matches": 206,
+      "date_range": {
+        "earliest": "2023-10-19 7:35:00 PM",
+        "latest": "2024-4-6 7:35:00 PM"
+      }
+    },
+    "scoring_stats": {
+      "total_goals": 0,
+      "average_goals_per_match": 0.0,
+      "home_win_rate": 0.0,
+      "away_win_rate": 0.0,
+      "draw_rate": 100.0
+    },
+    "attacking_stats": {
+      "total_shots": 5087,
+      "total_shots_on_target": 1772,
+      "average_shots_per_match": 24.69,
+      "average_shots_on_target_per_match": 8.6,
+      "shot_accuracy_rate": 34.8
+    },
+    "disciplinary_stats": {
+      "total_yellow_cards": 788,
+      "total_red_cards": 5,
+      "average_yellow_cards_per_match": 3.83,
+      "average_red_cards_per_match": 0.02
+    },
+    "set_piece_stats": {
+      "total_corners": 1960,
+      "average_corners_per_match": 9.51
+    },
+    "possession_stats": {
+      "average_home_possession": 0,
+      "average_away_possession": 0
+    }
+  }
+}
